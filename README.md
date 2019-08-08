@@ -2,6 +2,9 @@
 
 Add Microsoft's [LightGBM](https://github.com/microsoft/LightGBM) to a [Rocker](https://www.rocker-project.org/) Docker image.
 
+[![](https://img.shields.io/docker/cloud/automated/nuest/rocker-lightgbm)](https://hub.docker.com/r/nuest/rocker-lightgbm "Automated build on Docker Hub")
+ [![](https://images.microbadger.com/badges/image/nuest/rocker-lightgbm.svg)](https://microbadger.com/images/nuest/rocker-lightgbm "rocker-lightgbm on microbadger.com")
+
 ## About
 
 The image includes Python and installs both the [LightGBM R package](https://github.com/microsoft/LightGBM/tree/master/R-package) and the [LightGBM Python](https://github.com/microsoft/LightGBM/tree/master/python-package) and the LigthGBM CLI.
@@ -9,17 +12,23 @@ The image includes Python and installs both the [LightGBM R package](https://git
 As the base image we use `rocker/verse` so that the user has RStudio, and we have `git` for the installation.
 The installation instructions were taken from the [LightGBM `Dockerfile`s](https://github.com/microsoft/LightGBM/tree/master/docker).
 
-The `Dockerfile` in this repo uses the latest available R version for _demonstration_, though for _reproducibility_ workflows should be build on the `r-ver` stack of images.
+The `Dockerfile` in this repo uses the latest available R version for _demonstration_, though for _production_ and _reproducibility_ workflows should be build on the [version-stable `r-ver` stack of images](https://github.com/rocker-org/rocker-versioned/).
 
-## Build
+## tl;dr
 
+```bash
+docker run --rm -it -e PASSWORD=lightgbm -p 8787:8787 nuest/rocker-lightgbm
 ```
+
+## Build locally
+
+```bash
 docker build --tag rocker-lightgbm .
 ```
 
 ## R Example
 
-```
+```R
 daniel@gin-nuest:~/git/rocker-lightgbm$ docker run --rm -it rocker-lightgbm R
 
 R version 3.6.1 (2019-07-05) -- "Action of the Toes"
@@ -145,7 +154,7 @@ Loading required package: Matrix
 
 ## Python
 
-```
+```python
 daniel@gin-nuest:~/git/rocker-lightgbm$ docker run --rm -it rocker-lightgbm python
 Python 3.7.3 (default, Mar 27 2019, 22:11:17) 
 [GCC 7.3.0] :: Anaconda, Inc. on linux
@@ -160,7 +169,7 @@ lgb.LGBMModel(            lgb.basic                 lgb.cv(                   lg
 
 ## CLI Example
 
-```
+```bash
 daniel@gin-nuest:~/git/rocker-lightgbm$ docker run --rm -it rocker-lightgbm /bin/bash
 root@f9d36b4f40d4:/# cd /lgbm/LightGBM/examples/binary_classification/
 root@f9d36b4f40d4:/lgbm/LightGBM/examples/binary_classification# 

@@ -40,6 +40,20 @@ RUN Rscript build_r.R
 
 WORKDIR /
 
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE \
+        org.label-schema.name="LightGBM on Rocker" \
+        org.label-schema.description="All LightGBM libraries in a Rocker image for easy use in R" \
+        org.label-schema.url="https://github.com/nuest/rocker-lightgbm" \
+        org.label-schema.vcs-ref=$VCS_REF \
+        org.label-schema.vcs-url="https://github.com/nuest/rocker-lightgbm" \
+        org.label-schema.vendor="Daniel Nüst, Rocker.org, Microsoft" \
+        #org.label-schema.version=$VERSION \
+        org.label-schema.schema-version="1.0"
+
 # build:
 # docker build --tag rocker-lightgbm .
 # run:
